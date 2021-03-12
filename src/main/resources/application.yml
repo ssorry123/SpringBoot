@@ -1,0 +1,42 @@
+server:
+  port: 8000
+  servlet:
+    # context root
+    context-path: /blog
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
+spring:
+  mvc:
+    view:
+      # 컨트롤러가 파일을 리턴할때앞과 뒤에 붙는다.
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+   
+  # 사용할 db 정보
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
+    username: cos
+    password: cos1234
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      # 처음 실행할 때 create인지 확인해야 한다. 나중에 update로 바꾼다.
+      ddl-auto: create  
+      naming:
+        # jpa에서 정의한 필드 이름 그대로 db 컬럼을 만든다.
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      # jpa가 사용하는 기본 넘버링 전략을 따라가지 않겠다.
+      use-new-id-generator-mappings: false
+    show-sql: true
+    properties:
+      # sql 정렬해서 이쁘게 보여줌.
+      hibernate.format_sql: true  
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
